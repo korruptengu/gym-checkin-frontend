@@ -4,6 +4,8 @@ import Typography from "@mui/joy/Typography";
 import Divider from "@mui/joy/Divider";
 import Stack from "@mui/joy/Stack";
 import axios from "axios";
+import Button from "@mui/joy/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function UserInfoCard() {
   const [user, setUser] = React.useState<{
@@ -16,6 +18,7 @@ export default function UserInfoCard() {
 
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState("");
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const token = localStorage.getItem("token"); // JWT aus Login speichern
@@ -74,6 +77,13 @@ export default function UserInfoCard() {
           <strong>Rolle:</strong> {user.role}
         </Typography>
       </Stack>
+      <Button
+          variant="solid"
+          color="primary"
+          sx={{ mt: 2 }}
+          onClick={() => navigate("/profile/edit")}>
+        Daten bearbeiten
+      </Button>
     </Card>
   );
 }
